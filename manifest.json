@@ -1,8 +1,8 @@
 {
-    "name": "ABP Data formatter",
+    "name": "Data formatter",
     "version": "1.0",
     "manifest_version": 2,
-    "description": "ABP Data Formatter",
+    "description": "Data Formatter",
     "background": {
         "scripts": [
                         "background.js",
@@ -23,7 +23,7 @@
         "contextMenus"
     ],
     "browser_action":{
-        "default_title" : "ABP Data formatter",
+        "default_title" : "Data formatter",
         "default_icon" : "ext_icon.png"
     }
   }
