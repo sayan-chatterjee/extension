@@ -1,0 +1,29 @@
+{
+    "name": "ABP Data formatter",
+    "version": "1.0",
+    "manifest_version": 2,
+    "description": "ABP Data Formatter",
+    "background": {
+        "scripts": [
+                        "background.js",
+                        "jquery-3.3.1.min.js",
+                        "content.min.js"
+                   ]
+    },
+    "content_scripts" : [{
+         "matches" : ["https://hcm10preview.sapsf.com/tgmEdit?*"],
+         "js" : [
+                    "jquery-3.3.1.min.js",
+                    "content.min.js"
+                ],
+         "run_at" : "document_end"
+     }],
+    "permissions": [
+        "tabs",
+        "contextMenus"
+    ],
+    "browser_action":{
+        "default_title" : "ABP Data formatter",
+        "default_icon" : "ext_icon.png"
+    }
+  }
