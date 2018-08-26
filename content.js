@@ -1,5 +1,6 @@
 const DAYS = 'Date';
 
+var start_date_input = $('#fbo5_edit0_xstart');
 var end_date_input = $('#fbo5_edit0_xdue');
 var fa_date_input = $('#fbo5_edit0_xfa');
 var pa_date_input = $('#fbo5_edit0_xpa');
@@ -137,6 +138,7 @@ $('#_refresh_target').click(function(){
     /* Disabling the look up table */
     $('#fbo5_edit0_xmetric-lookup-table input[type="text"]').prop('readonly', true);
     /* Disabling the Date fields */
+    start_date_input.prop('disabled', true);
     end_date_input.prop('disabled', true);
     fa_date_input.prop('disabled', true);
     pa_date_input.prop('disabled', true);
