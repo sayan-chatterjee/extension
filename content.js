@@ -13,7 +13,7 @@ var saveButton = $('button[id="wizNextButtonedit"');
 var disableClass = 'tgm-v12-wizard-btn globalPlacematText globalHumanistText tgm-v12-wizard-btn-no-bg globalSecondaryButton';
 var enableClass='globalPrimaryButton tgm-v12-wizard-btn globalHumanistText';
 
-/* Adding the Refresh Target button only when there will Target present */
+/* Adding the Refresh Target button only when there will be Target present */
 if(null!=target_element.val()){
     $('#wizCancelButtonedit').after(
         '<button id="_refresh_target" title="Refresh"'+ 
