@@ -1,0 +1,31 @@
+{
+    "name": "ABP Print Plugin",
+    "version": "1.0",
+    "manifest_version": 2,
+    "description": "ABP Print Plugin",
+    "background": {
+        "scripts": [
+                        "background.js",
+                        "lib/jquery-3.3.1.min.js",
+                        "lib/popper.min.js",
+                        "lib/bootstrap.min.js",
+                        "js/print.js"
+                   ]
+    },
+    "content_scripts" : [{
+         "matches" : ["https://hcm10preview.sapsf.com/acme?*"],
+         "js" : [
+                    "lib/jquery-3.3.1.min.js",
+                    "js/print.js"
+                ],
+        "run_at" : "document_end"
+     }],
+    "web_accessible_resources": ["css/bootstrap.min.css","css/kra_style.css"],
+    "permissions": [
+        "activeTab"
+    ],
+    "browser_action":{
+        "default_title" : "ABP Plugin",
+        "default_icon" : "ext_icon.png"
+    }
+  }
