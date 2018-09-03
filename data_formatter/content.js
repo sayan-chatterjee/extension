@@ -51,10 +51,10 @@ if(DAYS === kraType){
     pa_date_input.prop('disabled', true);
     ea_date_input.val('DD/MM/YYYY');
     ea_date_input.prop('disabled', true);
-    /*
+
     actual_date_input.val('DD/MM/YYYY');
     actual_date_input.prop('disabled', true);
-    */
+    
 }
 
 /* Change of dropdown */
@@ -98,14 +98,13 @@ $('#fbo5_edit0_xUOM').change(function() {
 
 /* Adding click event to the Refresh Target button */
 $('#_refresh_target').click(function(){   
-    if(DAYS === kraType){
+    if(DAYS===kraType && null==actual_date_input.val()){
         /* Get the date value as string */
         var start_date_str = $('#fbo5_edit0_xstart').val();
         var fa_date_str = $('#fbo5_edit0_xfa').val();
         var pa_date_str = $('#fbo5_edit0_xpa').val();
         var ea_date_str = $('#fbo5_edit0_xea').val();
-        /* var actual_date_str = $('#fbo5_edit0_xADate');*/
-        /* convert the string values to date object */
+        
         var date_component = start_date_str.split("/");   
         var start_date = new Date(date_component[2], date_component[1] - 1, date_component[0]);
         date_component = fa_date_str.split("/");
@@ -114,17 +113,7 @@ $('#_refresh_target').click(function(){
         var pa_date = new Date(date_component[2], date_component[1] - 1, date_component[0]);
         date_component = ea_date_str.split("/");
         var ea_date = new Date(date_component[2], date_component[1] - 1, date_component[0]);
-        /*
-        var actual_value = 0;
-        if(null!=actual_date_str.val()){
-          date_component = actual_date_str.val().split("/");
-          var actual_date = new Date(date_component[2], date_component[1] - 1, date_component[0]);
-          actual_value = ((new Date(actual_date - start_date))/(1000 * 3600 * 24)).toFixed();
-          alert(actual_value);
-          actual_value = parseInt(actual_value) + 1;
-          actual_date_input.prop('disabled', true);
-        }
-        */
+        
         /* calculate the difference as no. of days and rounding off using toFixed */
         var fa_value = ((new Date(fa_date - start_date))/(1000 * 3600 * 24)).toFixed();
         var pa_value = ((new Date(pa_date - start_date))/(1000 * 3600 * 24)).toFixed();
@@ -144,12 +133,34 @@ $('#_refresh_target').click(function(){
         
         /* populate the target days with FA value */
         target_element.val(valsArr[1]);
-        /*$('#fbo5_edit0_xactual-achievement').val(actual_value);
-        $('#fbo5_edit0_xactual-achievement').prop('disabled', true);*/
+        
+    } else if(DAYS===kraType && null!=actual_date_input.val()) {
+        /* Get actual date value */
+        var actual_value = 0;
+        var date_component = actual_date_input.val().split("/");
+        var actual_date = new Date(date_component[2], date_component[1] - 1, date_component[0]);
+
+        var start_date_str = start_date_input.prev().text();
+        date_component = start_date_str.split("/");   
+        var start_date = new Date(date_component[2], date_component[1] - 1, date_component[0]);
+
+        actual_value = ((new Date(actual_date - start_date))/(1000 * 3600 * 24)).toFixed();
+        actual_value = (isNaN(actual_value)) ? -1 : actual_value;
+        actual_value = parseInt(actual_value) + 1;
+        /* Disabling the Actual date and input field */
+        actual_date_input.prop('disabled', true);
+        $('#fbo5_edit0_xactual-achievement').val(actual_value);
+        $('#fbo5_edit0_xactual-achievement').prop('readonly', true);
     } else {
-        /* Get the fa days value as string */
-        var fa_days = $('input[id="fbo5_edit0_xmetric-lookup-table_achievement_#1"]').val();
-        target_element.val(fa_days);
+        if(null!=actual_date_input.val()){
+            /* Disabling the Actual date and input field */
+            actual_date_input.prop('disabled', true);
+            $('#fbo5_edit0_xactual-achievement').prop('readonly', true);
+        }else{
+            /* Get the fa days value as string */
+            var fa_days = $('input[id="fbo5_edit0_xmetric-lookup-table_achievement_#1"]').val();
+            target_element.val(fa_days);
+        }
     }
 
     /* Disabling the Refresh button */
