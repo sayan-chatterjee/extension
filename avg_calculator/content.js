@@ -48,8 +48,8 @@ function createKraList(propLeftTables, propRightTables) {
     for(var i = 0; i < propRightTables.length; i++) {     
         var rightLabel = $(propRightTables[i]).find("td[class='lab']").html().toLowerCase();
         var rightValue = $(propRightTables[i]).find("td[class='val']").html();
-        console.log('rLabel :', rightLabel);
-        console.log('rValue :', rightValue);
+        //console.log('rLabel :', rightLabel);
+        //console.log('rValue :', rightValue);
         if(-1 != rightLabel.indexOf(emp_achievement_label)) {
             rightValue = (null == rightValue)? 0: rightValue;
             //console.log('kra :',kraList[(i+4)/4-1]);
@@ -77,7 +77,7 @@ function calculateAchievement(kraList){
         'empActual' : (empActualAchievement/100).toFixed(2),
         'raActual' : (raActualAchievement/100).toFixed(2)
     }
-    console.log('result :',result);
+    //console.log('result :',result);
     return result;
 }
 
