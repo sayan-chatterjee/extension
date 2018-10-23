@@ -1,4 +1,4 @@
-chrome.browserAction.onClicked.addListener(function(tab){
+/*chrome.browserAction.onClicked.addListener(function(tab){
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
         var activeTab = tabs[0];
         const message = 'average calculator';
@@ -7,4 +7,4 @@ chrome.browserAction.onClicked.addListener(function(tab){
                       };
         chrome.tabs.sendMessage(activeTab.id, request);
     });
-});
+});*/

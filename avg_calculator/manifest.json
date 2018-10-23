@@ -7,14 +7,14 @@
         "scripts": [
                         "background.js",
                         "jquery-3.3.1.min.js",
-                        "content.js"
+                        "content.min.js"
                    ]
     },
     "content_scripts" : [{
          "matches" : ["https://hcm10preview.sapsf.com/acme*"],
          "js" : [
                     "jquery-3.3.1.min.js",
-                    "content.js"
+                    "content.min.js"
                 ]
      }],
     "permissions": [
