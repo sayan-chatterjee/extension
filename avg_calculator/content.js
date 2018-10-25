@@ -4,8 +4,6 @@ var calculateButton = '<div class=" pmFooterButtonSpacing">'+
 '</span></span></div>';
 var footerButtons = $("#footer_buttons_rev").html();
 $("#footer_buttons_rev").html(calculateButton + footerButtons);
-$('#wf_sect_7_e_0').val('0.00 %');
-$('#wf_sect_8_e_ele_10').val('0.00 %');
 
 function getQuarterId() {
     var quarter = $("div[id='381:_stepsChartStepName']").html().toLowerCase();
