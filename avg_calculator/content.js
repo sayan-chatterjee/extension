@@ -1,3 +1,4 @@
+var EMPTY_STRING = "";
 var calculateButton = '<div class=" pmFooterButtonSpacing">'+
 '<span id="_calculate_span" class="buttonset sfDialogBoxButtonWrapper"><span>'+
 '<button style="background-color: azure;" class="globalRoundedCornersXSmall globalSecondaryButton buttonDefault" id="_calculate_button" type="button" accesskey="2">Calculate</button>'+
@@ -6,7 +7,9 @@ var footerButtons = $("#footer_buttons_rev").html();
 $("#footer_buttons_rev").html(calculateButton + footerButtons);
 
 function getQuarterId() {
-    var quarter = $("div[id='381:_stepsChartStepName']").html().toLowerCase();
+    var quarter = $("div[class='sfStepsChartNameContainer'] div[class='sfStepsChartStepName sfStepsChartStepNamePosition']")
+                   .html().toLowerCase();
+    //console.log("Quarter :",quarter);
     if(-1 != quarter.indexOf('q1')) {   
         return '#sect_3';
     } else if(-1 != quarter.indexOf('q2')) {   
@@ -22,24 +25,34 @@ function createKraList(propLeftTables, propRightTables) {
     var kraList = [];   
     var ra_achievement_label = "Achievement (RA)".toLowerCase();
     var emp_achievement_label = "Achievement (Employee)".toLowerCase();
-    for(var i = 0; i < propLeftTables.length; i+=4) {
+    var goalWeightageFound = false;
+    for(var i = 0; i < propLeftTables.length; i++) {
+        var dataFound = false;
         var kra = {'goalWeightage':0, 'raInput':0, 'empInput':0};
-        for(var j=0; j<4; j++){
-            var leftLabel = $(propLeftTables[i+j]).find("td[class='lab']").html().toLowerCase();
-            var leftValue = $(propLeftTables[i+j]).find("td[class='val']").html();
-            //console.log('lLabel :', leftLabel);
-            //console.log('lvalue :', leftValue);
-            if("goal weightage" === leftLabel) {
-                leftValue = (null == leftValue)? 0: leftValue;
-                kra.goalWeightage = parseFloat(leftValue.replace('%',''));
-            }
-            else if(-1 != leftLabel.indexOf(ra_achievement_label)) {
-                leftValue = (null == leftValue)? 0: leftValue;
+        var leftLabel = $(propLeftTables[i]).find("td[class='lab']").html().toLowerCase();
+        var leftValue = $(propLeftTables[i]).find("td[class='val']").html();
+        //console.log('lLabel :', leftLabel);
+        //console.log('lvalue :', leftValue);
+        if("goal weightage" === leftLabel) {
+            leftValue = (null == leftValue || EMPTY_STRING === leftValue)? '0.00%': leftValue;
+            kra.goalWeightage = parseFloat(leftValue.replace('%',''));
+            dataFound = true;
+            goalWeightageFound = true;
+        }
+        if(-1 != leftLabel.indexOf(ra_achievement_label)) {
+            if(goalWeightageFound){
+                leftValue = (null == leftValue || EMPTY_STRING === leftValue)? '0.00%': leftValue;
+                kra = kraList.pop();
+                //console.log('last item', kra);
                 kra.raInput = parseFloat(leftValue.replace('%',''));
+                dataFound = true;
+                goalWeightageFound = false;
             }
         }
         //console.log('kra :', kra);
-        kraList.push(kra);
+        if(dataFound) {
+            kraList.push(kra);
+        }
     }
     //console.log('kraList :', kraList);
     var count = 0;
@@ -49,7 +62,7 @@ function createKraList(propLeftTables, propRightTables) {
         //console.log('rLabel :', rightLabel);
         //console.log('rValue :', rightValue);
         if(-1 != rightLabel.indexOf(emp_achievement_label)) {
-            rightValue = (null == rightValue)? 0: rightValue;
+            rightValue = (null == rightValue || EMPTY_STRING === rightValue)? '0.00%': rightValue;
             //console.log('kra :',kraList[(i+4)/4-1]);
             kraList[count++].empInput = parseFloat(rightValue.replace('%',''));
         }

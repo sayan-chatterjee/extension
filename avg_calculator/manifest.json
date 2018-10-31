@@ -11,7 +11,7 @@
                    ]
     },
     "content_scripts" : [{
-         "matches" : ["https://hcm10preview.sapsf.com/acme*"],
+         "matches" : ["https://hcm10preview.sapsf.com/acme*","https://hcm10preview.sapsf.com/sf/pmreviews*"],
          "js" : [
                     "jquery-3.3.1.min.js",
                     "content.min.js"
