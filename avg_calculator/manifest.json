@@ -11,11 +11,15 @@
                    ]
     },
     "content_scripts" : [{
-         "matches" : ["https://hcm10preview.sapsf.com/acme*","https://hcm10preview.sapsf.com/sf/pmreviews*"],
+         "matches" : ["https://hcm10preview.sapsf.com/acme*",
+                      "https://hcm10preview.sapsf.com/sf/pmreviews*",
+                      "https://hcm10preview.sapsf.com/tgmEdit*"
+                     ],
          "js" : [
                     "jquery-3.3.1.min.js",
                     "content.min.js"
-                ]
+                ],
+         "run_at" : "document_end"
      }],
     "permissions": [
         "activeTab"
