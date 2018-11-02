@@ -6,26 +6,26 @@ var calculateButton = '<div class=" pmFooterButtonSpacing">'+
 '</span></span></div>';
 var footerButtons = $("#footer_buttons_rev").html();
 */
-var empWghtdAvgTextInput = $("#sect_7 div[class='HRContentCell'] input");
-var raWghtdAvgTextInput = $("#sect_8 div[class='HRContentCell'] input");
+var empWghtdAvgTextInput;
+var raWghtdAvgTextInput;
 //$("#footer_buttons_rev").html(calculateButton + footerButtons);
-
-//Disabling the input text boxes
-empWghtdAvgTextInput.prop('disabled', true);
-raWghtdAvgTextInput.prop('disabled', true);
 
 function getQuarterId() {
     var quarter = $("div[class='sfStepsChartNameContainer'] div[class='sfStepsChartStepName sfStepsChartStepNamePosition']")
                    .html().toLowerCase();
     //console.log("Quarter :",quarter);
+    empWghtdAvgTextInput = $("#sect_7 div[class='HRContentCell'] input");
+    raWghtdAvgTextInput = $("#sect_8 div[class='HRContentCell'] input");
     if(-1 != quarter.indexOf('q1')) {   
         return '#sect_3';
     } else if(-1 != quarter.indexOf('q2')) {   
         return '#sect_4';
     } else if(-1 != quarter.indexOf('q3')) {   
         return '#sect_5';
-    } else if(-1 != quarter.indexOf('q4')) {   
-        return '#sect_6';
+    } else if(-1 != quarter.indexOf('q4')) { 
+        empWghtdAvgTextInput = $("#sect_4 div[class='HRContentCell'] input");
+        raWghtdAvgTextInput = $("#sect_5 div[class='HRContentCell'] input");  
+        return '#sect_3';
     }  
 }
 
@@ -133,7 +133,11 @@ function calculate(){
     var result = calculateAchievement(kraList);
 
     empWghtdAvgTextInput.val(isNaN(result.empActual)?'NA':(result.empActual+' %'));
-    raWghtdAvgTextInput.val(isNaN(result.raActual)?'NA':(result.raActual+' %'));   
+    raWghtdAvgTextInput.val(isNaN(result.raActual)?'NA':(result.raActual+' %'));  
+    
+    //Disabling the input text boxes
+    empWghtdAvgTextInput.prop('disabled', true);
+    raWghtdAvgTextInput.prop('disabled', true);
 }
 
 $(document).ready(function(){
