@@ -11,9 +11,13 @@
                    ]
     },
     "content_scripts" : [{
-         "matches" : ["https://hcm10preview.sapsf.com/acme*",
+         "matches" : [
+					  "https://hcm10preview.sapsf.com/acme*",
                       "https://hcm10preview.sapsf.com/sf/pmreviews*",
-                      "https://hcm10preview.sapsf.com/tgmEdit*"
+                      "https://hcm10preview.sapsf.com/tgmEdit*",
+                      "https://performancemanager10.successfactors.com/acme*",
+                      "https://performancemanager10.successfactors.com/sf/pmreviews*",
+                      "https://performancemanager10.successfactors.com/tgmEdit*"
                      ],
          "js" : [
                     "jquery-3.3.1.min.js",
