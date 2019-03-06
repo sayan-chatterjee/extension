@@ -134,10 +134,10 @@ function calculate(){
 
     empWghtdAvgTextInput.val(isNaN(result.empActual)?'NA':(result.empActual+' %'));
     raWghtdAvgTextInput.val(isNaN(result.raActual)?'NA':(result.raActual+' %'));  
-    
-    //Disabling the input text boxes
-    empWghtdAvgTextInput.prop('disabled', true);
-    raWghtdAvgTextInput.prop('disabled', true);
+
+    //Making the input text boxes readonly
+    empWghtdAvgTextInput.prop('readonly', true);
+    raWghtdAvgTextInput.prop('readonly', true);
 }
 
 $(document).ready(function(){
