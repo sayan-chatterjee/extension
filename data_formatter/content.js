@@ -5,7 +5,6 @@ var end_date_input = $('#fbo5_edit0_xdue');
 var fa_date_input = $('#fbo5_edit0_xfa');
 var pa_date_input = $('#fbo5_edit0_xpa');
 var ea_date_input = $('#fbo5_edit0_xea');
-var actual_date_input = $('#fbo5_edit0_xADate');
 var target_element = $('#fbo5_edit0_xtarget-baseline');
 
 var kraType = $("#fbo5_edit0_xUOM option:selected").text();
@@ -51,10 +50,6 @@ if(DAYS === kraType){
     pa_date_input.prop('disabled', true);
     ea_date_input.val('DD/MM/YYYY');
     ea_date_input.prop('disabled', true);
-
-    actual_date_input.val('DD/MM/YYYY');
-    actual_date_input.prop('disabled', true);
-    
 }
 
 /* Change of dropdown */
@@ -98,13 +93,14 @@ $('#fbo5_edit0_xUOM').change(function() {
 
 /* Adding click event to the Refresh Target button */
 $('#_refresh_target').click(function(){   
-    if(DAYS===kraType && null==actual_date_input.val()){
+    if(DAYS === kraType){
         /* Get the date value as string */
         var start_date_str = $('#fbo5_edit0_xstart').val();
         var fa_date_str = $('#fbo5_edit0_xfa').val();
         var pa_date_str = $('#fbo5_edit0_xpa').val();
         var ea_date_str = $('#fbo5_edit0_xea').val();
-        
+
+        /* convert the string values to date object */
         var date_component = start_date_str.split("/");   
         var start_date = new Date(date_component[2], date_component[1] - 1, date_component[0]);
         date_component = fa_date_str.split("/");
@@ -113,16 +109,20 @@ $('#_refresh_target').click(function(){
         var pa_date = new Date(date_component[2], date_component[1] - 1, date_component[0]);
         date_component = ea_date_str.split("/");
         var ea_date = new Date(date_component[2], date_component[1] - 1, date_component[0]);
-        
+
         /* calculate the difference as no. of days and rounding off using toFixed */
         var fa_value = ((new Date(fa_date - start_date))/(1000 * 3600 * 24)).toFixed();
         var pa_value = ((new Date(pa_date - start_date))/(1000 * 3600 * 24)).toFixed();
         var ea_value = ((new Date(ea_date - start_date))/(1000 * 3600 * 24)).toFixed();
-        
-        fa_value = parseInt(fa_value)+1;
-        pa_value = parseInt(pa_value)+1;
-        ea_value = parseInt(ea_value)+1;
-        
+
+        /*place actual hour as emply string if actual date is not choosed*/
+        var actualDateStr = $('#fbo5_edit0_xADate').val();
+        var actualDateCount = $('#fbo5_edit0_xactual-achievement');
+        if(actualDateStr === "DD/MM/YYYY") {
+            $(actualDateCount).val("");
+        }       
+
+
         /* populate the values in achievement look up table */
         var valsArr = [pa_value, fa_value, ea_value];
         var lookUpTable = $('#fbo5_edit0_xmetric-lookup-table input[type="text"]');    
@@ -130,37 +130,13 @@ $('#_refresh_target').click(function(){
             valsArr[i] = (isNaN(valsArr[i])) ? 0 : valsArr[i];
             $(lookUpTable[i]).val(valsArr[i]);
         }
-        
+
         /* populate the target days with FA value */
         target_element.val(valsArr[1]);
-        
-    } else if(DAYS===kraType && null!=actual_date_input.val()) {
-        /* Get actual date value */
-        var actual_value = 0;
-        var date_component = actual_date_input.val().split("/");
-        var actual_date = new Date(date_component[2], date_component[1] - 1, date_component[0]);
-
-        var start_date_str = start_date_input.prev().text();
-        date_component = start_date_str.split("/");   
-        var start_date = new Date(date_component[2], date_component[1] - 1, date_component[0]);
-
-        actual_value = ((new Date(actual_date - start_date))/(1000 * 3600 * 24)).toFixed();
-        actual_value = (isNaN(actual_value)) ? -1 : actual_value;
-        actual_value = parseInt(actual_value) + 1;
-        /* Disabling the Actual date and input field */
-        actual_date_input.prop('disabled', true);
-        $('#fbo5_edit0_xactual-achievement').val(actual_value);
-        $('#fbo5_edit0_xactual-achievement').prop('readonly', true);
     } else {
-        if(null!=actual_date_input.val()){
-            /* Disabling the Actual date and input field */
-            actual_date_input.prop('disabled', true);
-            $('#fbo5_edit0_xactual-achievement').prop('readonly', true);
-        }else{
-            /* Get the fa days value as string */
-            var fa_days = $('input[id="fbo5_edit0_xmetric-lookup-table_achievement_#1"]').val();
-            target_element.val(fa_days);
-        }
+        /* Get the fa days value as string */
+        var fa_days = $('input[id="fbo5_edit0_xmetric-lookup-table_achievement_#1"]').val();
+        target_element.val(fa_days);
     }
 
     /* Disabling the Refresh button */
