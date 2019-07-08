@@ -50,11 +50,6 @@ function calculateScore(dataArray){
     });
 };
 
-function calculateMBR(){
-    console.log('called calculate()');
-    calculateScore(getData());
-}
-
 $(document).ready(function(){
-    calculateMBR();
+    calculateScore(getData());
 });
