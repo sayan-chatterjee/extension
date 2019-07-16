@@ -46,15 +46,20 @@ function getData() {
 function calculateScore(dataArray){
     var adjustment = 0;
     var mbr_score = 0;
+    var total_active_wght = 0;
+
     dataArray.forEach(element => {
         console.log(element);
         //Calculation logic to be written
         adjustment += (STATUS_DROP_RTNG === element.STATUS_KEY ? element.WEIGHTAGE_KEY : 0);
-        mbr_score += (STATUS_ACTIVE === element.STATUS_KEY) ? (element.RATING_KEY / element.WEIGHTAGE_KEY) : 0;
+        mbr_score += (STATUS_ACTIVE === element.STATUS_KEY) ? (element.RATING_KEY * element.WEIGHTAGE_KEY)/100 : 0;
+        total_active_wght += (STATUS_ACTIVE === element.STATUS_KEY) ? element.WEIGHTAGE_KEY : 0;
     });
-    //console.log("adjustment : ", adjustment);
-    var annual_mbr_score = mbr_score * (100 - adjustment);
-    //console.log("annual_mbr_score : ", annual_mbr_score);
+    console.log("adjustment : ", adjustment);
+    console.log("mbr_score : ", mbr_score);
+    console.log("total_active_wght : ", total_active_wght);
+    var annual_mbr_score = (mbr_score/total_active_wght) * (total_active_wght + adjustment);
+    console.log("annual_mbr_score : ", annual_mbr_score);
     var annual_mbr_element = $("div h2[title='MBR Annual Score']");
     var mbr_score_element = annual_mbr_element.parent().siblings("div").find("div[class='HRContentCell'] input");
     //console.log(mbr_score_element.html());
