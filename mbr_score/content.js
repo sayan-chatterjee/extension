@@ -1,4 +1,3 @@
-var dataArray = [];
 var WEIGHTAGE_KEY = "Weightage";
 var RATING_KEY = "Rating";
 var SCORE_KEY = "Score";
@@ -8,7 +7,10 @@ var STATUS_ACTIVE = "Active";
 var STATUS_DROP = "Drop (Specify reason in 'Achievement so far' comment box)";
 var STATUS_DROP_RTNG = "Drop but considered for rating";
 
-function getData() {   
+var MBR_SCORE_ELEM = $("div h2[title='MBR Annual Score']").parent().siblings("div").find("div[class='HRContentCell'] input");
+
+function getData() { 
+    var dataArray = [];  
     var goals = $("div[class='tabDataBorder']");
     $.each(goals, function (index, goal) {
         var goalAttrList = $(goal).find("table[class='goalDetailsTable']");
@@ -62,13 +64,12 @@ function calculateScore(dataArray){
     console.log("weighted_avg_score : ", weighted_avg_score);
     var annual_mbr_score = weighted_avg_score * (total_active_wght + adjustment);
     console.log("annual_mbr_score : ", annual_mbr_score);
-    var annual_mbr_element = $("div h2[title='MBR Annual Score']");
-    var mbr_score_element = annual_mbr_element.parent().siblings("div").find("div[class='HRContentCell'] input");
-    //console.log(mbr_score_element.html());
-    mbr_score_element.val(annual_mbr_score.toFixed(2));
-    //mbr_score_element.prop("readonly", true);
+    
+    //MBR_SCORE_ELEM.prop("readonly", true);
+    MBR_SCORE_ELEM.val(annual_mbr_score.toFixed(2));
 };
 
 $(document).ready(function(){
+    console.log("Already Saved MBR Score :: ",MBR_SCORE_ELEM.val());
     calculateScore(getData());
 });
