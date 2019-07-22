@@ -58,13 +58,15 @@ function calculateScore(dataArray){
     console.log("adjustment : ", adjustment);
     console.log("mbr_score : ", mbr_score);
     console.log("total_active_wght : ", total_active_wght);
-    var annual_mbr_score = (mbr_score/total_active_wght) * (total_active_wght + adjustment);
+    var weighted_avg_score = (0.0 === total_active_wght) ? 0 : mbr_score/total_active_wght ;
+    console.log("weighted_avg_score : ", weighted_avg_score);
+    var annual_mbr_score = weighted_avg_score * (total_active_wght + adjustment);
     console.log("annual_mbr_score : ", annual_mbr_score);
     var annual_mbr_element = $("div h2[title='MBR Annual Score']");
     var mbr_score_element = annual_mbr_element.parent().siblings("div").find("div[class='HRContentCell'] input");
     //console.log(mbr_score_element.html());
     mbr_score_element.val(annual_mbr_score.toFixed(2));
-    mbr_score_element.prop("readonly", true);
+    //mbr_score_element.prop("readonly", true);
 };
 
 $(document).ready(function(){
