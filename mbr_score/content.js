@@ -8,6 +8,7 @@ var STATUS_DROP = "Drop (Specify reason in 'Achievement so far' comment box)";
 var STATUS_DROP_RTNG = "Drop but considered for rating";
 
 var MBR_SCORE_ELEM = $("div h2[title='MBR Annual Score']").parent().siblings("div").find("div[class='HRContentCell'] input");
+var CURRENT_STEP = "sfcurrentstep"; 
 
 function getData() { 
     var dataArray = [];  
@@ -39,7 +40,7 @@ function getData() {
                 });
             });  
         });
-        //console.log("Data : "+JSON.stringify(data));  
+        /* console.log("Data : "+JSON.stringify(data)); */
         dataArray.push(data);   
     });
     return dataArray;    
@@ -52,7 +53,7 @@ function calculateScore(dataArray){
 
     dataArray.forEach(element => {
         console.log(element);
-        //Calculation logic to be written
+        /* Calculation logic to be written */
         adjustment += (STATUS_DROP_RTNG === element.STATUS_KEY ? element.WEIGHTAGE_KEY : 0);
         mbr_score += (STATUS_ACTIVE === element.STATUS_KEY) ? (element.RATING_KEY * element.WEIGHTAGE_KEY)/100 : 0;
         total_active_wght += (STATUS_ACTIVE === element.STATUS_KEY) ? element.WEIGHTAGE_KEY : 0;
@@ -65,11 +66,20 @@ function calculateScore(dataArray){
     var annual_mbr_score = weighted_avg_score * (total_active_wght + adjustment);
     console.log("annual_mbr_score : ", annual_mbr_score);
     
-    //MBR_SCORE_ELEM.prop("readonly", true);
+    /* MBR_SCORE_ELEM.prop("readonly", true); */
     MBR_SCORE_ELEM.val(annual_mbr_score.toFixed(2));
 };
 
 $(document).ready(function(){
     console.log("Already Saved MBR Score :: ",MBR_SCORE_ELEM.val());
-    calculateScore(getData());
+    var routeMapDiv = $("div#routeMap");
+    var mbrAnnualReviewStep =$(routeMapDiv).find("div[title='MBR Annual Review']");
+    var mbrAnnualReviewClass = $(mbrAnnualReviewStep).attr("class");
+    /* console.log("MBR Annual Review step class...", mbrAnnualReviewClass.toLowerCase()); */
+    if(mbrAnnualReviewClass.toLowerCase().indexOf(CURRENT_STEP) != -1) {
+        console.log("Form in MBR Annual Review step...");
+        calculateScore(getData());
+    } else {
+        console.log("Form NOT in MBR Annual Review step...");
+    }    
 });
