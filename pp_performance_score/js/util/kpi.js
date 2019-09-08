@@ -25,10 +25,13 @@ function calculateKpiScore(goalSection){
 
         var kpiScore = (weightageValue * (l1MgrRatingValue + l2MgrRatingValue))/(2 * 10);
         var parentTable = $(this).parentsUntil("table");
+        /* Populating individual goal score */
         $(parentTable[parentTable.length-1])
             .find("tr:nth-child(2) td:first-child")
             .find("div:nth-child(2) input")
             .val(kpiScore);
+            
+        /* Updating total kpi score */
         updateTotalKpiScore(goalSection);
     });
 }
@@ -50,11 +53,14 @@ function updateTotalKpiScore(goalSection) {
     var totalKpiTable = $(totalKpiCustElem).find("table");
     var totalKpiScoreInput = $(totalKpiTable).find("tr:first-child")
                                                  .find("td:nth-child(2) input"); 
+    /* Populating the total kpi score */
     $(totalKpiScoreInput).val(totalKpiScore);
 
+    /* Clearing pre-selected rating label */
     var mappingKpiDropDown = $(totalKpiTable).find("tr:nth-child(2)")
                                      .find("td:nth-child(2) select");
     $(mappingKpiDropDown).find("option").removeAttr('selected');
+    /* Calculating rating label based on new inputs and setting them in dropdown */
     var ratingLabel = getMapping(totalKpiScore);
     $(mappingKpiDropDown).find("option[value='" + ratingLabel + "']")
                          .attr('selected', 'selected');
