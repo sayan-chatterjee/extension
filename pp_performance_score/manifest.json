@@ -18,6 +18,7 @@
                     "js/constants.js",
                     "js/util/company_value.js",
                     "js/util/kpi.js",
+                    "js/util/potential.js",
                     "js/content.js"
                 ],
          "run_at" : "document_end"

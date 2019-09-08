@@ -38,7 +38,7 @@ function updateTotalCVScore(companyValueSection) {
     var totalCVCustElem = $("div#sect_5 div.customelements");
     var totalCVTable = $(totalCVCustElem).find("table");
     var totalCVScoreInput = $(totalCVTable).find("tr:first-child")
-                                            .find("td:nth-child(2) input"); 
+                                           .find("td:nth-child(2) input"); 
     /* Populating the total company value score */
     $(totalCVScoreInput).val(totalCVScore);
 

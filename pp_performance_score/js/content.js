@@ -7,8 +7,12 @@ $(document).ready(function(){
         console.log("Form in L2 Manager Review step...");
         var goalSection = $("div#sect_2");
         calculateKpiScore(goalSection);
+
         var companyValueSection = $("div#sect_4");
         calculateCompanyValue(companyValueSection);
+
+        var potentialSection = $("div#sect_6");
+        calculatePotential(potentialSection);
     } else {
         console.log("Form NOT in L2 Manager Review step...");
     }   
