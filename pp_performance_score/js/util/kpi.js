@@ -58,7 +58,7 @@ function updateTotalKpiScore(goalSection) {
 
     /* Clearing pre-selected rating label */
     var mappingKpiDropDown = $(totalKpiTable).find("tr:nth-child(2)")
-                                     .find("td:nth-child(2) select");
+                                             .find("td:nth-child(2) select");
     $(mappingKpiDropDown).find("option").removeAttr('selected');
     /* Calculating rating label based on new inputs and setting them in dropdown */
     var ratingLabel = getMapping(totalKpiScore);
