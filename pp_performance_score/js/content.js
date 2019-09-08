@@ -5,8 +5,8 @@ $(document).ready(function(){
     console.log("L2 Manager Review step class...", l2ManagerReviewClass.toLowerCase());
     if(l2ManagerReviewClass.toLowerCase().indexOf(CURRENT_STEP) != -1) {
         console.log("Form in L2 Manager Review step...");
-        var goalSectionCustomElements = $("div#sect_2");
-        calculateKpiScore(goalSectionCustomElements);
+        var goalSection = $("div#sect_2");
+        calculateKpiScore(goalSection);
     } else {
         console.log("Form NOT in L2 Manager Review step...");
     }   
