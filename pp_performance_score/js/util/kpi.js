@@ -30,7 +30,7 @@ function calculateKpiScore(goalSection){
             .find("tr:nth-child(2) td:first-child")
             .find("div:nth-child(2) input")
             .val(kpiScore);
-            
+
         /* Updating total kpi score */
         updateTotalKpiScore(goalSection);
     });
@@ -42,8 +42,8 @@ function updateTotalKpiScore(goalSection) {
     console.log("Individual KPI scores ::");
     $.each(customElements, function(index, individualGoal){
         var kpiScore = $(individualGoal).find("table tr:nth-child(2) td:first-child")
-                                          .find("div:nth-child(2) input")
-                                          .val();
+                                        .find("div:nth-child(2) input")
+                                        .val();
         kpiScore = Number.isNaN(parseFloat(kpiScore)) ? 0.0 : parseFloat(kpiScore);
         console.log(kpiScore);
         totalKpiScore += kpiScore;
@@ -52,7 +52,7 @@ function updateTotalKpiScore(goalSection) {
     var totalKpiCustElem = $("div#sect_3 div.customelements");
     var totalKpiTable = $(totalKpiCustElem).find("table");
     var totalKpiScoreInput = $(totalKpiTable).find("tr:first-child")
-                                                 .find("td:nth-child(2) input"); 
+                                             .find("td:nth-child(2) input"); 
     /* Populating the total kpi score */
     $(totalKpiScoreInput).val(totalKpiScore);
 
