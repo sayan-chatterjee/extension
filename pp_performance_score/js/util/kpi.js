@@ -54,7 +54,11 @@ function updateTotalKpiScore(goalSection) {
 
     var mappingKpiDropDown = $(totalKpiTable).find("tr:nth-child(2)")
                                      .find("td:nth-child(2) select");
-    $(mappingKpiDropDown).val(getMapping(totalKpiScore));
+    $(mappingKpiDropDown).find("option").removeAttr('selected');
+    var ratingLabel = getMapping(totalKpiScore);
+    $(mappingKpiDropDown).find("option[value='" + ratingLabel + "']")
+                         .attr('selected', 'selected');
+    $(mappingKpiDropDown).parent().siblings("input").val(ratingLabel);
 }
 
 function getMapping(totalKpiScore){
@@ -70,6 +74,6 @@ function getMapping(totalKpiScore){
     }else if(totalKpiScore >= 10.00 && totalKpiScore <= 16.00){
         ratingLabel = KPI_RATING_LABEL_LOW;
     }
-    /* console.log("Rating label ::",ratingLabel); */
+    console.log("Rating label ::",ratingLabel);
     return ratingLabel;
 }
