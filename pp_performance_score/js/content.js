@@ -6,13 +6,16 @@ $(document).ready(function(){
     if(l2ManagerReviewClass.toLowerCase().indexOf(CURRENT_STEP) != -1) {
         console.log("Form in L2 Manager Review step...");
         var goalSection = $("div#sect_2");
-        calculateKpiScore(goalSection);
+        var totalKpiScore = calculateKpiScore(goalSection);
 
         var companyValueSection = $("div#sect_4");
-        calculateCompanyValue(companyValueSection);
+        var totalCVScore = calculateCompanyValue(companyValueSection);
 
         var potentialSection = $("div#sect_6");
-        calculatePotential(potentialSection);
+        var totalPotentialScore = calculatePotential(potentialSection);
+
+        //mapFinalRating(totalKpiScore, totalCVScore, totalPotentialScore);
+        mapFinalRating();
     } else {
         console.log("Form NOT in L2 Manager Review step...");
     }   

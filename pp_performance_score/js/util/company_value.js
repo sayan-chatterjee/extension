@@ -17,7 +17,7 @@ function calculateCompanyValue(companyValueSection){
             .val(cvScore);
 
         /* Updating total company value score */
-        updateTotalCVScore(companyValueSection);
+        return updateTotalCVScore(companyValueSection);
     });
 }
 
@@ -47,13 +47,15 @@ function updateTotalCVScore(companyValueSection) {
                                             .find("td:nth-child(2) select");
     $(mappingCVDropDown).find("option").removeAttr('selected');
     /* Calculating rating label based on new inputs and setting them in dropdown */
-    var ratingLabel = getMapping(totalCVScore);
+    var ratingLabel = getCVMapping(totalCVScore);
     $(mappingCVDropDown).find("option[value='" + ratingLabel + "']")
                          .attr('selected', 'selected');
     $(mappingCVDropDown).parent().siblings("input").val(ratingLabel);
+
+    return totalCVScore;
 }
 
-function getMapping(totalCVScore){
+function getCVMapping(totalCVScore){
     var ratingLabel = "Select";
     if(totalCVScore >= 34.01){
         ratingLabel = RATING_LABEL_HIGH;

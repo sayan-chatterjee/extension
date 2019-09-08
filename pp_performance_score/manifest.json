@@ -18,6 +18,7 @@
                     "js/constants.js",
                     "js/util/company_value.js",
                     "js/util/kpi.js",
+                    "js/util/mapping_pac.js",
                     "js/util/potential.js",
                     "js/content.js"
                 ],

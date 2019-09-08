@@ -23,7 +23,7 @@ function calculatePotential(potentialSection){
             .val(potentialScore);
 
         /* Updating total potential score */
-        updateTotalPotentialScore(potentialSection);
+        return updateTotalPotentialScore(potentialSection);
     });
 }
 
@@ -53,13 +53,15 @@ function updateTotalPotentialScore(potentialSection) {
                                                          .find("td:nth-child(2) select");
     $(mappingPotentialDropDown).find("option").removeAttr('selected');
     /* Calculating rating label based on new inputs and setting them in dropdown */
-    var ratingLabel = getMapping(totalPotentialScore);
+    var ratingLabel = getPotentialMapping(totalPotentialScore);
     $(mappingPotentialDropDown).find("option[value='" + ratingLabel + "']")
                                .attr('selected', 'selected');
     $(mappingPotentialDropDown).parent().siblings("input").val(ratingLabel);
+
+    return totalPotentialScore;
 }
 
-function getMapping(totalPotentialScore){
+function getPotentialMapping(totalPotentialScore){
     var ratingLabel = "Select";
     if(totalPotentialScore >= 34.01){
         ratingLabel = RATING_LABEL_HIGH;

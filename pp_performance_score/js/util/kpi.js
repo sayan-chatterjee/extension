@@ -32,7 +32,7 @@ function calculateKpiScore(goalSection){
             .val(kpiScore);
 
         /* Updating total kpi score */
-        updateTotalKpiScore(goalSection);
+        return updateTotalKpiScore(goalSection);
     });
 }
 
@@ -61,13 +61,15 @@ function updateTotalKpiScore(goalSection) {
                                              .find("td:nth-child(2) select");
     $(mappingKpiDropDown).find("option").removeAttr('selected');
     /* Calculating rating label based on new inputs and setting them in dropdown */
-    var ratingLabel = getMapping(totalKpiScore);
+    var ratingLabel = getKpiMapping(totalKpiScore);
     $(mappingKpiDropDown).find("option[value='" + ratingLabel + "']")
                          .attr('selected', 'selected');
     $(mappingKpiDropDown).parent().siblings("input").val(ratingLabel);
+
+    return totalKpiScore;
 }
 
-function getMapping(totalKpiScore){
+function getKpiMapping(totalKpiScore){
     var ratingLabel = "Select";
     if(totalKpiScore >= 34.01){
         ratingLabel = RATING_LABEL_HIGH;
