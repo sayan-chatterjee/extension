@@ -1,6 +1,6 @@
 function calculateKpiScore(goalSection){
-    var customElements = $(goalSection).find("div.customelements");
-    customElements.find("select").change(function(){
+    var kpiCustomElements = $(goalSection).find("div.customelements");
+    kpiCustomElements.find("select").change(function(){
         var l2MgrRating = parseFloat(this.value);
         var l2MgrRatingValue = Number.isNaN(l2MgrRating) ? 0.0 : l2MgrRating;
 
@@ -38,9 +38,9 @@ function calculateKpiScore(goalSection){
 
 function updateTotalKpiScore(goalSection) {
     var totalKpiScore = 0.0;
-    var customElements = $(goalSection).find("div.customelements");
+    var kpiCustomElements = $(goalSection).find("div.customelements");
     console.log("Individual KPI scores ::");
-    $.each(customElements, function(index, individualGoal){
+    $.each(kpiCustomElements, function(index, individualGoal){
         var kpiScore = $(individualGoal).find("table tr:nth-child(2) td:first-child")
                                         .find("div:nth-child(2) input")
                                         .val();
@@ -70,15 +70,15 @@ function updateTotalKpiScore(goalSection) {
 function getMapping(totalKpiScore){
     var ratingLabel = "Select";
     if(totalKpiScore >= 34.01){
-        ratingLabel = KPI_RATING_LABEL_HIGH;
+        ratingLabel = RATING_LABEL_HIGH;
     }else if(totalKpiScore >= 28.01 && totalKpiScore <= 34.00){
-        ratingLabel = KPI_RATING_LABEL_MEDIUM_HIGH;
+        ratingLabel = RATING_LABEL_MEDIUM_HIGH;
     }else if(totalKpiScore >= 22.01 && totalKpiScore <= 28.00){
-        ratingLabel = KPI_RATING_LABEL_MEDIUM;
+        ratingLabel = RATING_LABEL_MEDIUM;
     }else if(totalKpiScore >= 16.01 && totalKpiScore <= 22.00){
-        ratingLabel = KPI_RATING_LABEL_LOW_MEDIUM;
+        ratingLabel = RATING_LABEL_LOW_MEDIUM;
     }else if(totalKpiScore >= 10.00 && totalKpiScore <= 16.00){
-        ratingLabel = KPI_RATING_LABEL_LOW;
+        ratingLabel = RATING_LABEL_LOW;
     }
     console.log("Rating label ::",ratingLabel);
     return ratingLabel;

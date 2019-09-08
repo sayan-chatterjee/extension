@@ -16,6 +16,7 @@
          "js" : [
                     "js/lib/jquery-3.3.1.min.js",
                     "js/constants.js",
+                    "js/util/company_value.js",
                     "js/util/kpi.js",
                     "js/content.js"
                 ],
