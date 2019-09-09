@@ -5,7 +5,7 @@ const EMPTY_STRING = "";
 const RATING_LABEL_HIGH = "High";
 const RATING_LABEL_MEDIUM_HIGH = "Medium-High";
 const RATING_LABEL_MEDIUM = "Medium";
-const RATING_LAEL_LOW_MEDIUM = "Low-Medium";
+const RATING_LABEL_LOW_MEDIUM = "Low-Medium";
 const RATING_LABEL_LOW = "Low";
 
 const PAC_MAP_DORPDOWN = { 
