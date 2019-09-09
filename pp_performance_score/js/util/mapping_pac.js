@@ -27,24 +27,49 @@ function mapFinalRating() {
 
     var rowSelect = $("div#sect_9 select[name='formMatrix_rowRatingSelectionList']");
     $(rowSelect).find("option").removeAttr('selected');
-    $(rowSelect).find("option[value='" + PAC_MAP[kpi_cv_mapping] + "']")
+    $(rowSelect).find("option[value='" + PAC_MAP_DORPDOWN[kpi_cv_mapping] + "']")
                 .attr('selected', 'selected');
 
     var colSelect = $("div#sect_9 select[name='formMatrix_colRatingSelectionList']");
     $(colSelect).find("option").removeAttr('selected');
-    $(colSelect).find("option[value='" + PAC_MAP[potential_mapping] + "']")
+    $(colSelect).find("option[value='" + PAC_MAP_DORPDOWN[potential_mapping] + "']")
                 .attr('selected', 'selected');
-
-    updateEmployeePos();
+    
+    updateEmployeePos(parseFloat(PAC_MAP_DORPDOWN[kpi_cv_mapping])-1, 
+                      parseFloat(PAC_MAP_DORPDOWN[potential_mapping]-1));
 }
 
-function updateEmployeePos() {
-    var rowSelect = document.getElementById('formMatrix_rowRatingSelectionList');
-    var colSelect = document.getElementById('formMatrix_colRatingSelectionList');
-    var changeEvent = new Event("onchange", {"bubbles":true, "cancelable":false});
-    changeEvent.initEvent("onchange", true, true);
-    rowSelect.dispatchEvent(changeEvent);
-    colSelect.dispatchEvent(changeEvent);
+function updateEmployeePos(row, col) {
+    console.log(row + ", " + col);
+    var perfPotentialTable = $("table#formMatrix_table");
+    var tableGridRows = perfPotentialTable.find("tr");
+    //console.log(tableGridRows);
+    var empDetails = $(tableGridRows).find("td span[name='formMatrix_fullname_span']")
+                              .parent().parent().html();
+    /* removing the emp info */
+    $(tableGridRows).find("td span[name='formMatrix_fullname_span']")
+                    .parent().remove();
+    
+    var limit = $(tableGridRows).length - 3;
+    var rowIndex = 4, colIndex;
+    $.each(tableGridRows, function(index, rows){
+        if(index < limit){
+            var cells = $(rows).find('td'); //Cells in each row
+            if(rowIndex === row){
+                for(colIndex = 0; colIndex < cells.length; colIndex++){
+                    // console.log(rowIndex + ", " + colIndex);
+                    if(colIndex === col){
+                        console.log("=========Found=========");
+                        $(cells[colIndex]).find("ul").append(empDetails);
+                        $(cells[colIndex]).attr('visibility', 'visibility');
+                        // console.log($(cells[colIndex]).find("ul").html()); 
+                    }      
+                    
+                }
+            }
+            rowIndex--;
+        }
+    });
 }
 
 function getScoreMapping(score) {

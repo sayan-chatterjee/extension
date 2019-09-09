@@ -17,7 +17,7 @@ function calculateCompanyValue(companyValueSection){
             .val(cvScore);
 
         /* Updating total company value score */
-        return updateTotalCVScore(companyValueSection);
+        updateTotalCVScore(companyValueSection);
     });
 }
 
@@ -52,7 +52,7 @@ function updateTotalCVScore(companyValueSection) {
                          .attr('selected', 'selected');
     $(mappingCVDropDown).parent().siblings("input").val(ratingLabel);
 
-    return totalCVScore;
+    mapFinalRating();
 }
 
 function getCVMapping(totalCVScore){

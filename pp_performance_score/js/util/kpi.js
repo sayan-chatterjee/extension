@@ -32,7 +32,7 @@ function calculateKpiScore(goalSection){
             .val(kpiScore);
 
         /* Updating total kpi score */
-        return updateTotalKpiScore(goalSection);
+        updateTotalKpiScore(goalSection);
     });
 }
 
@@ -66,7 +66,7 @@ function updateTotalKpiScore(goalSection) {
                          .attr('selected', 'selected');
     $(mappingKpiDropDown).parent().siblings("input").val(ratingLabel);
 
-    return totalKpiScore;
+    mapFinalRating();
 }
 
 function getKpiMapping(totalKpiScore){

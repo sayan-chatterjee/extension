@@ -23,7 +23,7 @@ function calculatePotential(potentialSection){
             .val(potentialScore);
 
         /* Updating total potential score */
-        return updateTotalPotentialScore(potentialSection);
+        updateTotalPotentialScore(potentialSection);
     });
 }
 
@@ -58,7 +58,7 @@ function updateTotalPotentialScore(potentialSection) {
                                .attr('selected', 'selected');
     $(mappingPotentialDropDown).parent().siblings("input").val(ratingLabel);
 
-    return totalPotentialScore;
+    mapFinalRating();
 }
 
 function getPotentialMapping(totalPotentialScore){
