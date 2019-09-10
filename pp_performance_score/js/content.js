@@ -14,7 +14,6 @@ $(document).ready(function(){
         var potentialSection = $("div#sect_6");
         calculatePotential(potentialSection);
 
-        mapFinalRating();
     } else {
         console.log("Form NOT in L2 Manager Review step...");
     }   
