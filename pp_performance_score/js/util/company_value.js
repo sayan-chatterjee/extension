@@ -68,6 +68,6 @@ function getCVMapping(totalCVScore){
     }else if(totalCVScore >= 10.00 && totalCVScore <= 16.00){
         ratingLabel = RATING_LABEL_LOW;
     }
-    console.log("Rating label ::",ratingLabel);
+    console.log("Company Value Rating label ::",ratingLabel);
     return ratingLabel;
 }

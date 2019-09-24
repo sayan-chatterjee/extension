@@ -15,7 +15,7 @@ function mapFinalRating() {
     var totalCVScore = $(totalCVScoreInput).val();
 
     var kpi_cv_score = (0.7 * totalKpiScore) + (0.3 * totalCVScore);
-    var kpi_cv_mapping = getScoreMapping(kpi_cv_score);
+    var kpi_cv_mapping = getScoreMapping("KPI and CV", kpi_cv_score);
 
     /* Getting the total potential score */
     var totalPotentialCustElem = $("div#sect_7 div.customelements");
@@ -23,7 +23,7 @@ function mapFinalRating() {
     var totalPotentialScoreInput = $(totalPotentialTable).find("tr:first-child")
                                                          .find("td:nth-child(2) input");
     var totalPotentialScore = $(totalPotentialScoreInput).val();
-    var potential_mapping = getScoreMapping(totalPotentialScore);
+    var potential_mapping = getScoreMapping("Potential", totalPotentialScore);
 
     var rowSelect = $("div#sect_9 select[name='formMatrix_rowRatingSelectionList']");
     $(rowSelect).find("option").removeAttr('selected');
@@ -72,7 +72,7 @@ function updateEmployeePos(row, col) {
     });
 }
 
-function getScoreMapping(score) {
+function getScoreMapping(type, score) {
     var ratingLabel = "Select";
     if(score >= 34.01){
         ratingLabel = RATING_LABEL_HIGH;
@@ -85,6 +85,6 @@ function getScoreMapping(score) {
     }else if(score >= 10.00 && score <= 16.00){
         ratingLabel = RATING_LABEL_LOW;
     }
-    console.log("Rating label ::",ratingLabel);
+    console.log(type+" Rating label ::", ratingLabel);
     return ratingLabel;
 }
