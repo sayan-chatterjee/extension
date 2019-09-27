@@ -2,13 +2,26 @@ function calculatePotential(potentialSection){
     var potentialCustElem = $(potentialSection).find("div.customelements");
     var competencyCount = potentialCustElem.length;
     console.log("Competency count :: ", competencyCount);
+    
     potentialCustElem.find("select").change(function(){
+        var options = $(this).find("option");
+        var rating_map = {};
+        $.each(options, function(index){
+            var rating_text = $(this).text();
+            var rating_value = $(this).val();
+            rating_map[rating_text] = rating_value;
+        });
+        console.log('Map : ', JSON.stringify(rating_map));
+        console.log('l2 rating : ', this.value);
+
         var l2MgrRating = parseFloat(this.value);
         var l2MgrRatingValue = Number.isNaN(l2MgrRating) ? 0.0 : l2MgrRating;
 
         var parentTr = $(this).parentsUntil("tr");
         var l1MgrRating = $(parentTr[parentTr.length-1]).siblings().find("div:nth-child(2)").text();
-        var l1MgrRatingValue = Number.isNaN(parseFloat(l1MgrRating)) ? 0.0 : parseFloat(l1MgrRating);
+        console.log('l1 rating : ', rating_map[l1MgrRating]);
+        var l1MgrRatingValue = Number.isNaN(parseFloat(rating_map[l1MgrRating])) ? 0.0 
+                               : parseFloat(rating_map[l1MgrRating]);
 
         var potentialScore = 0.0;
         if(competencyCount >= 1){
@@ -20,7 +33,7 @@ function calculatePotential(potentialSection){
         $(parentTable[parentTable.length-1])
             .find("tr:nth-child(2) td:first-child")
             .find("div:nth-child(2) input")
-            .val(potentialScore);
+            .val(potentialScore.toFixed(2));
 
         /* Updating total potential score */
         updateTotalPotentialScore(potentialSection);
@@ -46,7 +59,7 @@ function updateTotalPotentialScore(potentialSection) {
     var totalPotentialScoreInput = $(totalPotentialTable).find("tr:first-child")
                                                          .find("td:nth-child(2) input"); 
     /* Populating the total potential score */
-    $(totalPotentialScoreInput).val(totalPotentialScore);
+    $(totalPotentialScoreInput).val(totalPotentialScore.toFixed(2));
 
     /* Clearing pre-selected rating label */
     var mappingPotentialDropDown = $(totalPotentialTable).find("tr:nth-child(2)")
@@ -74,6 +87,6 @@ function getPotentialMapping(totalPotentialScore){
     }else if(totalPotentialScore >= 10.00 && totalPotentialScore <= 16.00){
         ratingLabel = RATING_LABEL_LOW;
     }
-    console.log("Potential Rating label ::",ratingLabel);
+    console.log("Rating label ::",ratingLabel);
     return ratingLabel;
 }

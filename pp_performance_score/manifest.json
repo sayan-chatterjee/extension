@@ -11,7 +11,8 @@
     },
     "content_scripts" : [{
          "matches" : [
-                      "https://salesdemo4.successfactors.com/acme*"                      
+                      "https://salesdemo4.successfactors.com/acme*",
+                      "https://hcm44preview.sapsf.com/acme*"                     
                      ],
          "js" : [
                     "js/lib/jquery-3.3.1.min.js",

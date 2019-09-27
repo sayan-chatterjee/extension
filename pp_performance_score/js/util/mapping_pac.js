@@ -25,18 +25,22 @@ function mapFinalRating() {
     var totalPotentialScore = $(totalPotentialScoreInput).val();
     var potential_mapping = getScoreMapping("Potential", totalPotentialScore);
 
-    var rowSelect = $("div#sect_9 select[name='formMatrix_rowRatingSelectionList']");
+    var rowSelect = $("div#sect_8 select[name='formMatrix_rowRatingSelectionList']");
     $(rowSelect).find("option").removeAttr('selected');
-    $(rowSelect).find("option[value='" + PAC_MAP_DORPDOWN[kpi_cv_mapping] + "']")
+    $(rowSelect).find("option[value='" + PAC_MAP_DORPDOWN[potential_mapping] + "']")
                 .attr('selected', 'selected');
 
-    var colSelect = $("div#sect_9 select[name='formMatrix_colRatingSelectionList']");
+    var colSelect = $("div#sect_8 select[name='formMatrix_colRatingSelectionList']");
     $(colSelect).find("option").removeAttr('selected');
-    $(colSelect).find("option[value='" + PAC_MAP_DORPDOWN[potential_mapping] + "']")
+    $(colSelect).find("option[value='" + PAC_MAP_DORPDOWN[kpi_cv_mapping] + "']")
                 .attr('selected', 'selected');
-    
-    updateEmployeePos(parseFloat(PAC_MAP_DORPDOWN[kpi_cv_mapping])-1, 
-                      parseFloat(PAC_MAP_DORPDOWN[potential_mapping]-1));
+            
+    /* Map the last overall rating */
+    var totalRatingValue = $("div#sect_9 div.trrRatingDropdown select");
+    console.log("overall rating :: ", totalRatingValue);
+
+    updateEmployeePos(parseFloat(PAC_MAP_DORPDOWN[potential_mapping])-1, 
+                      parseFloat(PAC_MAP_DORPDOWN[kpi_cv_mapping]-1));
 }
 
 function updateEmployeePos(row, col) {
@@ -44,25 +48,34 @@ function updateEmployeePos(row, col) {
     var perfPotentialTable = $("table#formMatrix_table");
     var tableGridRows = perfPotentialTable.find("tr");
     //console.log(tableGridRows);
-    var empDetails = $(tableGridRows).find("td span[name='formMatrix_fullname_span']")
-                              .parent().parent().html();
+    /* var empDetails = $(tableGridRows).find("td span[name='formMatrix_fullname_span']")
+                              .parent().parent().html(); */
+    var empDetails = EMPLOYEE_INFO_CARD;
+    var employee_name = $("div[class='"+EMPLOYEE_NAME_CLASS+"']").text();
+    var employee_id = $("div.pmUserInfo div.leftCol tr:nth-child(2) td.val").text();
+    console.log("Emp name  and id ::", employee_name+"/"+employee_id);
+    empDetails = empDetails.replace("EMP_NAME", employee_name);
+    empDetails = empDetails.replace(/USER_ID/g, employee_id);
+    /* console.log("Emp details ::", empDetails); */
+
     /* removing the emp info */
     $(tableGridRows).find("td span[name='formMatrix_fullname_span']")
                     .parent().remove();
     
-    var limit = $(tableGridRows).length - 3;
+    var limit = $(tableGridRows).length - 2;
     var rowIndex = 4, colIndex;
     $.each(tableGridRows, function(index, rows){
         if(index < limit){
             var cells = $(rows).find('td'); //Cells in each row
             if(rowIndex === row){
                 for(colIndex = 0; colIndex < cells.length; colIndex++){
-                    // console.log(rowIndex + ", " + colIndex);
+                    
                     if(colIndex === col){
                         console.log("=========Found=========");
+                        console.log(rowIndex + ", " + colIndex);
                         $(cells[colIndex]).find("ul").append(empDetails);
                         $(cells[colIndex]).attr('visibility', 'visibility');
-                        // console.log($(cells[colIndex]).find("ul").html()); 
+                        console.log($(cells[colIndex]).find("ul").html()); 
                     }      
                     
                 }
@@ -75,16 +88,16 @@ function updateEmployeePos(row, col) {
 function getScoreMapping(type, score) {
     var ratingLabel = "Select";
     if(score >= 34.01){
-        ratingLabel = RATING_LABEL_HIGH;
+        ratingLabel = PAC_RATING_LABEL_HIGH;
     }else if(score >= 28.01 && score <= 34.00){
-        ratingLabel = RATING_LABEL_MEDIUM_HIGH;
+        ratingLabel = PAC_RATING_LABEL_MEDIUM_HIGH;
     }else if(score >= 22.01 && score <= 28.00){
-        ratingLabel = RATING_LABEL_MEDIUM;
+        ratingLabel = PAC_RATING_LABEL_MEDIUM;
     }else if(score >= 16.01 && score <= 22.00){
-        ratingLabel = RATING_LABEL_LOW_MEDIUM;
+        ratingLabel = PAC_RATING_LABEL_LOW_MEDIUM;
     }else if(score >= 10.00 && score <= 16.00){
-        ratingLabel = RATING_LABEL_LOW;
+        ratingLabel = PAC_RATING_LABEL_LOW;
     }
-    console.log(type+" Rating label ::", ratingLabel);
+    console.log(type+" Rating label ::",ratingLabel);
     return ratingLabel;
 }
