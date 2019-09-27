@@ -57,12 +57,12 @@ function updateEmployeePos(row, col) {
             var cells = $(rows).find('td'); //Cells in each row
             if(rowIndex === row){
                 for(colIndex = 0; colIndex < cells.length; colIndex++){
-                    // console.log(rowIndex + ", " + colIndex);
+                    /* console.log(rowIndex + ", " + colIndex); */
                     if(colIndex === col){
                         console.log("=========Found=========");
                         $(cells[colIndex]).find("ul").append(empDetails);
                         $(cells[colIndex]).attr('visibility', 'visibility');
-                        // console.log($(cells[colIndex]).find("ul").html()); 
+                        /* console.log($(cells[colIndex]).find("ul").html()); */
                     }      
                     
                 }
