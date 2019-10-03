@@ -86,22 +86,24 @@ function getScoreMapping(type, score) {
     return ratingLabel;
 }
 
+
+/*
 function updateEmployeePos(row, col) {
     console.log(row + ", " + col);
     //var perfPotentialTable = $("table#formMatrix_table");
     var tableGridRows = perfPotentialTable.find("tr");
     //console.log(tableGridRows);
-    /* var empDetails = $(tableGridRows).find("td span[name='formMatrix_fullname_span']")
-                              .parent().parent().html(); */
+    // var empDetails = $(tableGridRows).find("td span[name='formMatrix_fullname_span']")
+     //                         .parent().parent().html(); 
     var empDetails = EMPLOYEE_INFO_CARD;
     var employee_name = $("div[class='"+EMPLOYEE_NAME_CLASS+"']").text();
     var employee_id = $("div.pmUserInfo div.leftCol tr:nth-child(2) td.val").text();
     console.log("Emp name  and id ::", employee_name+"/"+employee_id);
     empDetails = empDetails.replace("EMP_NAME", employee_name);
     empDetails = empDetails.replace(/USER_ID/g, employee_id);
-    /* console.log("Emp details ::", empDetails); */
+    // console.log("Emp details ::", empDetails); 
 
-    /* removing the emp info */
+    // removing the emp info 
     $(tableGridRows).find("td span[name='formMatrix_fullname_span']")
                     .parent().remove();
     
@@ -126,4 +128,4 @@ function updateEmployeePos(row, col) {
             rowIndex--;
         }
     });
-}
+} */

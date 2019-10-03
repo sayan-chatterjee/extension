@@ -24,16 +24,7 @@ $(document).ready(function(){
             //console.log("keeping dropdown readonly...");
             $("div#sect_8 select option:not(:selected)").attr('disabled', true);
         }, 3000);
-        /*
-        $("div#sect_8 select[name='wf_sect_8_orating']").change(function(){
-            console.log("objective manually changed...");
-            mapFinalRating();    
-        });  */
-
-        $("div#sect_8 select").off('change').on('change', function(){
-            console.log("manually changed...");
-            mapFinalRating();  
-        });
+        
     } else {
         console.log("Form NOT in L2 Manager Review step...");
     }   
