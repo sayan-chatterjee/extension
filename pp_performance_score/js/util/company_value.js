@@ -23,10 +23,11 @@ function calculateCompanyValue(companyValueSection){
         var cvScore = l1MgrRatingValue + l2MgrRatingValue;
         var parentTable = $(this).parentsUntil("table");
         /* Populating individual comapny value score */
-        $(parentTable[parentTable.length-1])
-            .find("tr:nth-child(2) td:first-child")
-            .find("div:nth-child(2) input")
-            .val(cvScore.toFixed(2));
+        var indvCVScore = $(parentTable[parentTable.length-1])
+                                .find("tr:nth-child(2) td:first-child")
+                                .find("div:nth-child(2) input");
+        $(indvCVScore).val(cvScore.toFixed(2));
+        $(indvCVScore).attr("readonly", "readonly");
 
         /* Updating total company value score */
         updateTotalCVScore(companyValueSection);
@@ -53,6 +54,7 @@ function updateTotalCVScore(companyValueSection) {
                                            .find("td:nth-child(2) input"); 
     /* Populating the total company value score */
     $(totalCVScoreInput).val(totalCVScore.toFixed(2));
+    $(totalCVScoreInput).attr("readonly", "readonly");
 
     /* Clearing pre-selected rating label */
     var mappingCVDropDown = $(totalCVTable).find("tr:nth-child(2)")
@@ -60,8 +62,15 @@ function updateTotalCVScore(companyValueSection) {
     $(mappingCVDropDown).find("option").removeAttr('selected');
     /* Calculating rating label based on new inputs and setting them in dropdown */
     var ratingLabel = getCVMapping(totalCVScore);
-    $(mappingCVDropDown).find("option[value='" + ratingLabel + "']")
-                         .attr('selected', 'selected');
+
+    $.each($(mappingCVDropDown).find("option"), function(index, optionElem){
+        if(ratingLabel === $(optionElem).text()) {
+            $(optionElem).attr('selected', 'selected');
+        }
+    });
+    $(mappingCVDropDown).attr("disabled", true);
+    /* $(mappingCVDropDown).find("option[value='" + ratingLabel + "']")
+                         .attr('selected', 'selected'); */
     $(mappingCVDropDown).parent().siblings("input").val(ratingLabel);
 
     mapFinalRating();
