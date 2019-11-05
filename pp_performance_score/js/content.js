@@ -27,22 +27,22 @@ $(document).ready(function(){
         var totKpiCustElem = $("div#sect_3 div.customelements");
         var totKpiTable = $(totKpiCustElem).find("table");
         var totKpiScoreInput = $(totKpiTable).find("tr:first-child")
-                                             .find("td:nth-child(2) input");
+                                             .find("td:nth-child(2) input"); 
         $(totKpiScoreInput).attr("readonly", "readonly");
 
-        var totCVElem = $("div#sect_3 div.customelements");
+        var totCVElem = $("div#sect_5 div.customelements");
         var totCVTable = $(totCVElem).find("table");
         var totCVInput = $(totCVTable).find("tr:first-child")
-                                             .find("td:nth-child(2) input");
+                                             .find("td:nth-child(2) input"); 
         $(totCVInput).attr("readonly", "readonly");
 
         var totalPotCustElem = $("div#sect_7 div.customelements");
         var totalPotTable = $(totalPotCustElem).find("table");
         var totalPotScoreInput = $(totalPotTable).find("tr:first-child")
-                                                         .find("td:nth-child(2) input");
+                                                         .find("td:nth-child(2) input"); 
         $(totalPotScoreInput).attr("readonly", "readonly");
         /************************/
-        
+
         //var or = $("div#sect_8 select[name='wf_sect_8_orating'] :selected");
         console.log("obj ::",$("div#sect_8 select[name='wf_sect_8_orating'] :selected").val());
         console.log("pot ::",$("div#sect_8 select[name='wf_sect_8_crating'] :selected").val());
