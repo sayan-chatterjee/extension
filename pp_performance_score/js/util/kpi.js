@@ -22,7 +22,9 @@ function calculateKpiScore(goalSection){
 
         var weightageValue = 0.0;
         var parentDiv = $(this).parentsUntil("div[class='pmPanelContent globalPortletBody']");
-        var goalDetailsTable = $(parentDiv[parentDiv.length-1]).find("div.goalDetailsTab");
+        var topParent = $(parentDiv[parentDiv.length-1]).parent();
+        /* var goalDetailsTable = $(parentDiv[parentDiv.length-1]).find("div.goalDetailsTab"); */
+        var goalDetailsTable = $(topParent).find("div.goalDetailsTab");
         var goalDetailsItem = $(goalDetailsTable).find("tr");
         $.each(goalDetailsItem, function(index, row){
             var label = $(row).children("td.lab").text();
