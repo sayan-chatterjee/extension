@@ -11,12 +11,20 @@
     },
     "content_scripts" : [{
          "matches" : [
-                      "https://salesdemo4.successfactors.com/acme*"                      
+                      "https://salesdemo4.successfactors.com/acme*",
+                      "https://salesdemo4.successfactors.com/sf/pmreviews*",
+                      "https://hcm44preview.sapsf.com/acme*",
+                      "https://hcm44preview.sapsf.com/sf/pmreviews*",
+                      "https://hcm44.sapsf.com/acme*",
+                      "https://hcm44.sapsf.com/sf/pmreviews*"
                      ],
          "js" : [
                     "js/lib/jquery-3.3.1.min.js",
                     "js/constants.js",
+                    "js/util/company_value.js",
                     "js/util/kpi.js",
+                    "js/util/mapping_pac.js",
+                    "js/util/potential.js",
                     "js/content.js"
                 ],
          "run_at" : "document_end"

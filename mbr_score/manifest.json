@@ -7,17 +7,20 @@
         "scripts": [
                         "background.js",
                         "jquery-3.3.1.min.js",
-                        "content.js"
+                        "content_v2.js",
+                        "rating.js"
                    ]
     },
     "content_scripts" : [{
          "matches" : [
                       "https://performancemanager10.successfactors.com/acme*",
-                      "https://performancemanager10.successfactors.com/sf/pmreview*"
+                      "https://performancemanager10.successfactors.com/sf/pmreview*",
+                      "https://performancemanager10.successfactors.com/tgmEdit*"
                      ],
          "js" : [
                     "jquery-3.3.1.min.js",
-                    "content.js"
+                    "content_v2.js",
+                    "rating.js"
                 ],
          "run_at" : "document_end"
      }],
