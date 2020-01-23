@@ -1,6 +1,6 @@
 # MBR Annual Score and Goal Rating Calculator
 
-1.	For integration of auto-calculation we need to check below logic;
+1.	For integration of auto-calculation we need to check below logic;  
     a.	Whether Target for rating “4” is defined or not
     b.	If target is increasing or decreasing
         Note :
