@@ -83,8 +83,10 @@ function calclteNegtveRatngWithoutTarget(data) {
 }
 
 function calculateRating(data){
-	data.GOAL_ACHIEVEMENT = (null!=data.GOAL_ACHIEVEMENT && !isNaN(data.GOAL_ACHIEVEMENT))?
-								data.GOAL_ACHIEVEMENT : 0.0;
+	if(null==data.GOAL_ACHIEVEMENT || isNaN(data.GOAL_ACHIEVEMENT)){
+		return "";
+	}
+
 	/*console.log("User input :", data.GOAL_ACHIEVEMENT);*/
 
 	/* check if GOAL_TARGET_FOR_SCORE exist */
@@ -151,12 +153,12 @@ $(document).ready(function(){
 		}		
 	});
 	
-	$("input[data-identifier='goal-rating']").val(calculateRating(data));
+	$("input[data-identifier='goal-rating']").attr("value", calculateRating(data));
 	$("input[data-identifier='goal-rating']").attr("readonly", true);
 	
 	$("input[data-type='user-input']").keyup(function(){
 		console.log("user entered data...");
 		data.GOAL_ACHIEVEMENT = parseFloat($(this).val());
-		$("input[data-identifier='goal-rating']").val(calculateRating(data));
+		$("input[data-identifier='goal-rating']").attr("value", calculateRating(data));
 	});
 });
