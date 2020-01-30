@@ -1,3 +1,10 @@
+/**
+ * This file is used to calculate the "Enter rating between 0 to 4" field
+ * based on user input of "Achievement so far" and on rules as per scenarios of
+ * Budget, Outstanding and Target for a Score
+ * For calculation formula refer README.md
+ */
+
 var GOAL_BUDGET = "Budget";
 var GOAL_OUTSTANDING = "Outstanding";
 var GOAL_TARGET_FOR_SCORE = "Target for a Score";

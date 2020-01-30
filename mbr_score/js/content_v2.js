@@ -1,3 +1,9 @@
+/**
+ * This file is used to calculate the 
+ * MBR Annual Score based on simple weighted
+ * average calculation formula(refer README.md)
+ */
+
 var WEIGHTAGE_KEY = "Weightage";
 var RATING_KEY = "Rating";
 
