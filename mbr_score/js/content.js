@@ -6,7 +6,8 @@
  *  
  * This file is retained but is not being used, hence not
  * included in "manifest.json", instead "content_v2.js" is 
- * now used for the calculation of MBR Annual Score.
+ * now used for the calculation of MBR Annual Score and "rating.js"
+ * is used for Individual Goal Rating.
  */
 
 
