@@ -5,10 +5,10 @@
     "description": "MBR Score Calculator",
     "background": {
         "scripts": [
-                        "background.js",
-                        "jquery-3.3.1.min.js",
-                        "content_v2.min.js",
-                        "rating.min.js"
+                        "lib/jquery-3.3.1.min.js",
+                        "js/background.js",
+                        "js/content_v2.min.js",
+                        "js/rating.min.js"
                    ]
     },
     "content_scripts" : [{
@@ -18,9 +18,9 @@
                       "https://performancemanager10.successfactors.com/tgmEdit*"
                      ],
          "js" : [
-                    "jquery-3.3.1.min.js",
-                    "content_v2.min.js",
-                    "rating.min.js"
+                    "lib/jquery-3.3.1.min.js",
+                    "js/content_v2.min.js",
+                    "js/rating.min.js"
                 ],
          "run_at" : "document_end"
      }],
