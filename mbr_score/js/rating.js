@@ -98,7 +98,8 @@ function calculateRating(data){
 
 	/* check if GOAL_TARGET_FOR_SCORE exist */
 	var functionSelector = data.GOAL_OUTSTANDING - data.GOAL_BUDGET;
-	if(data.hasOwnProperty('GOAL_TARGET_FOR_SCORE')) {
+	if(data.hasOwnProperty('GOAL_TARGET_FOR_SCORE') && null!=data.GOAL_TARGET_FOR_SCORE
+		 											&& !isNaN(data.GOAL_TARGET_FOR_SCORE)) {
 		console.log(GOAL_TARGET_FOR_SCORE + " : ", data.GOAL_TARGET_FOR_SCORE);
 		if(functionSelector > 0) {
 			/* Target exists and its increasing */
@@ -108,7 +109,7 @@ function calculateRating(data){
 			return calclteNegtveRatngWithTarget(data);
 		}
 	} else {
-		console.log(GOAL_TARGET_FOR_SCORE + " does not exist : ", data);
+		console.log(GOAL_TARGET_FOR_SCORE + " does not exist or null or NaN : ", data);
 		if(functionSelector > 0) {
 			/* Target does not exist and its increasing */
 			return calcltePostveRatngWithoutTarget(data);
